@@ -1,16 +1,24 @@
 import tiktoken
+import streamlit as st
 
 
-def encode_text_to_tokens(text: str) -> None:
+def streamlit_render(text: str) -> None:
+    st.write(text)
+
+
+def encode_text_to_tokens(text: str) -> str:
     GPT_MODEL = "gpt-3.5-turbo"
 
     encoding = tiktoken.encoding_for_model(GPT_MODEL)
     tokens = encoding.encode(text)
 
-    print(f"Text length: {len(text)}")
-    print(f"Tokens: {tokens}")
-    print(f"Tokens length: {len(tokens)}")
+    return f"Text length: {len(text)}, \
+        Tokens: {tokens}, \
+        Tokens length: {len(tokens)}"
 
 
 if __name__ == "__main__":
-    encode_text_to_tokens("Test text.")
+    sample_text = "Hello world!!!!!!!!"
+    tokens_info = encode_text_to_tokens(sample_text)
+
+    streamlit_render(f"{sample_text}\n\n{tokens_info}")
