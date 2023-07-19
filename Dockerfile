@@ -16,4 +16,5 @@ RUN poetry config virtualenvs.create false \
 
 COPY ./src ./src
 
-CMD ["python", "src/main.py"]
+# CMD ["python", "src/main.py"]
+CMD ["streamlit", "run", "src/main.py"]

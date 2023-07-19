@@ -1,4 +1,9 @@
 import tiktoken
+import streamlit as st
+
+
+def streamlit_render(text: str) -> None:
+    st.write(text)
 
 
 def encode_text_to_tokens(text: str) -> None:
@@ -13,4 +18,5 @@ def encode_text_to_tokens(text: str) -> None:
 
 
 if __name__ == "__main__":
-    encode_text_to_tokens("Test text.")
+    # encode_text_to_tokens("Test text.")
+    streamlit_render("Hello world!!!!!!!!")
