@@ -3,6 +3,9 @@ import streamlit as st
 
 
 def streamlit_render(text: str) -> None:
+    st.set_page_config(page_title="GPT Assistant", page_icon=":rocket:")
+    st.header(":rocket: GPT Assistant")
+
     st.write(text)
 
 
