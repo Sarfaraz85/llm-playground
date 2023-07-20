@@ -2,11 +2,9 @@ import tiktoken
 import streamlit as st
 
 
-def streamlit_render(text: str) -> None:
+def streamlit_render() -> None:
     st.set_page_config(page_title="GPT Assistant", page_icon=":rocket:")
     st.header(":rocket: GPT Assistant")
-
-    st.write(text)
 
     form_container = st.container()
     with form_container:
@@ -16,6 +14,7 @@ def streamlit_render(text: str) -> None:
 
         if user_input and submit_button:
             st.write(f"> {user_input}")
+            st.write(encode_text_to_tokens(user_input))
 
 
 def encode_text_to_tokens(text: str) -> str:
@@ -30,7 +29,4 @@ def encode_text_to_tokens(text: str) -> str:
 
 
 if __name__ == "__main__":
-    sample_text = "Hello world!!!!!!!!"
-    tokens_info = encode_text_to_tokens(sample_text)
-
-    streamlit_render(f"{sample_text}\n\n{tokens_info}")
+    streamlit_render()
