@@ -1,13 +1,25 @@
-# py_llm
+# Py LLM
+
+This repository contains a sample Dockerized Python application that uses LangChain and Streamlit together. The application encodes a given text into GPTed and displays it using Streamlit.
+
+__Note:__ This repository is intended for personal verification purposes and is not primarily intended for production development use. Preparation is required to use OpenAI's LangChain.
 
 ## Sample Usage
 
-```sh
-➜  docker build -t py_llm .
-```
+### Building and Running Locally
 
-```sh
-➜  docker run --rm -p 8501:8501 py_llm
-```
+- You can build the Docker image and launch the application using the following commands:
 
-and see http://localhost:8501/
+  ```sh
+  ➜  docker build -t py_llm .
+  ```
+
+  ```sh
+  ➜  docker run --rm -p 8501:8501 py_llm
+  ```
+
+- After launch, access http://localhost:8501 in your browser to display the application's UI.
+
+## Application Features
+
+WIP
