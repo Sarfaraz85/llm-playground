@@ -8,6 +8,15 @@ def streamlit_render(text: str) -> None:
 
     st.write(text)
 
+    form_container = st.container()
+    with form_container:
+        with st.form(key="form_textarea", clear_on_submit=True):
+            user_input = st.text_area(label="何でも聞いてくれ", key="input", height=80)
+            submit_button = st.form_submit_button(label="送信")
+
+        if user_input and submit_button:
+            st.write(f"> {user_input}")
+
 
 def encode_text_to_tokens(text: str) -> str:
     GPT_MODEL = "gpt-3.5-turbo"
