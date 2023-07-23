@@ -8,14 +8,24 @@ __Note:__ This repository is intended for personal verification purposes and is 
 
 ### Building and Running Locally
 
-- You can build the Docker image and launch the application using the following commands:
+You can build the Docker image and launch the application using the following commands:
+
+- Prepare `.env` file
 
   ```sh
-  ➜  docker build -t py_llm .
+  cp .env.sample .env
+  ```
+
+- Set `OPENAI_API_KEY` (required)
+
+- docker build and docker run
+
+  ```sh
+  docker build -t py_llm .
   ```
 
   ```sh
-  ➜  docker run --rm -p 8501:8501 py_llm
+  docker run --rm -p 8501:8501 -e OPENAI_API_KEY=$(cat .env | grep OPENAI_API_KEY | cut -d '=' -f2) py_llm
   ```
 
 - After launch, access http://localhost:8501 in your browser to display the application's UI.

@@ -1,5 +1,6 @@
 import tiktoken
 import streamlit as st
+from function import langchain_chat
 
 
 def streamlit_render() -> None:
@@ -15,6 +16,10 @@ def streamlit_render() -> None:
         if user_input and submit_button:
             st.write(f"> {user_input}")
             st.write(encode_text_to_tokens(user_input))
+
+            response: str = f"{langchain_chat.chat(user_input)}"
+            st.write(response)
+            st.write(encode_text_to_tokens(response))
 
 
 def encode_text_to_tokens(text: str) -> str:
