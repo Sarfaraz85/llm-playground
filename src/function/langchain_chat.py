@@ -6,19 +6,6 @@ import os
 os.getenv("OPENAI_API_KEY")
 
 
-def chat(question: str):
-    """for debug"""
-    llm = ChatOpenAI(temperature=0.1)
-
-    questions = [
-        system_message_content(),
-        human_message_content(question),
-    ]
-    response = llm(questions)
-
-    return response
-
-
 def system_message_content() -> SystemMessage:
     """Generates a SystemMessage with a predefined content."""
     return SystemMessage(content="なるべく簡潔かつ文量少なく返答せよ。")
