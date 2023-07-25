@@ -4,6 +4,7 @@ from function import langchain_chat
 
 
 def streamlit_render() -> None:
+    """Renders the main Streamlit page."""
     st.set_page_config(page_title="GPT Assistant", page_icon=":rocket:")
     st.header(":rocket: GPT Assistant")
 
@@ -17,27 +18,34 @@ def streamlit_render() -> None:
             submit_button = st.form_submit_button(label="送信")
 
     if user_input and submit_button:
-        st.session_state.messages.append(
-            langchain_chat.human_message_content(user_input)
-        )
-        with st.spinner("Generating ..."):
-            response = langchain_chat.llm_generate(st.session_state.messages)
+        _handle_user_input(user_input)
+        _display_messages()
 
-        st.session_state.messages.append(langchain_chat.ai_message(response.content))
 
-        messages = st.session_state.get("messages", [])
+def _handle_user_input(user_input: str) -> None:
+    """Handles user input by generating a language model response."""
+    st.session_state.messages.append(langchain_chat.human_message_content(user_input))
+    with st.spinner("Generating ..."):
+        response = langchain_chat.llm_generate(st.session_state.messages)
 
-        for message in messages:
-            if langchain_chat.is_human_message(message):
-                with st.chat_message("user"):
-                    st.markdown(message.content)
-                    st.write(f"> {encode_text_to_tokens(message.content)}")
-            elif langchain_chat.is_ai_message(message):
-                with st.chat_message("assistant"):
-                    st.markdown(message.content)
-                    st.write(f"> {encode_text_to_tokens(message.content)}")
-            else:
-                st.write(f"system message: {message.content}")
+    st.session_state.messages.append(langchain_chat.ai_message(response.content))
+
+
+def _display_messages() -> None:
+    """Displays the messages in the messages session state."""
+    messages = st.session_state.get("messages", [])
+
+    for message in messages:
+        if langchain_chat.is_human_message(message):
+            with st.chat_message("user"):
+                st.markdown(message.content)
+                st.write(f"> {encode_text_to_tokens(message.content)}")
+        elif langchain_chat.is_ai_message(message):
+            with st.chat_message("assistant"):
+                st.markdown(message.content)
+                st.write(f"> {encode_text_to_tokens(message.content)}")
+        else:
+            st.write(f"system message: {message.content}")
 
 
 def encode_text_to_tokens(text: str) -> str:
