@@ -3,9 +3,6 @@ from langchain.schema import SystemMessage, HumanMessage, AIMessage
 import os
 
 
-os.getenv("OPENAI_API_KEY")
-
-
 def system_message_content() -> SystemMessage:
     """Generates a SystemMessage with a predefined content."""
     return SystemMessage(content="なるべく簡潔かつ文量少なく返答せよ。")
@@ -18,7 +15,9 @@ def human_message_content(question: str) -> HumanMessage:
 
 def llm_generate(messages: list[SystemMessage | HumanMessage | AIMessage]) -> AIMessage:
     """Generates a language model response based on given messages."""
-    llm = ChatOpenAI(temperature=0.1)
+    api_key = os.getenv("OPENAI_API_KEY")
+
+    llm = ChatOpenAI(api_key=api_key, temperature=0.1)
     response = llm(messages)
 
     return response
