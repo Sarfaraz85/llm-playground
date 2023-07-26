@@ -1,9 +1,10 @@
 import streamlit as st
-from function import langchain_chat
-from function import token_utils
+from function.langchain_chat import LangchainChat
+from function.token_utils import TokenUtils
 
 GPT_MODEL = "gpt-3.5-turbo"
-tokenizer = token_utils.TokenUtils(GPT_MODEL)
+tokenizer = TokenUtils(GPT_MODEL)
+langchain_chat = LangchainChat()
 
 
 def streamlit_render() -> None:
@@ -17,7 +18,7 @@ def streamlit_render() -> None:
     form_container = st.container()
     with form_container:
         with st.form(key="form_textarea", clear_on_submit=True):
-            user_input = st.text_area(label="何でも聞いてくれ", key="input", height=80)
+            user_input = st.text_area(label="何でも聞いてください", key="input", height=80)
             submit_button = st.form_submit_button(label="送信")
 
     if user_input and submit_button:
