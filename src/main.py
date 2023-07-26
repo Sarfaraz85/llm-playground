@@ -1,6 +1,9 @@
-import tiktoken
 import streamlit as st
 from function import langchain_chat
+from function import token_utils
+
+GPT_MODEL = "gpt-3.5-turbo"
+tokenizer = token_utils.TokenUtils(GPT_MODEL)
 
 
 def streamlit_render() -> None:
@@ -39,24 +42,13 @@ def _display_messages() -> None:
         if langchain_chat.is_human_message(message):
             with st.chat_message("user"):
                 st.markdown(message.content)
-                st.write(f"> {encode_text_to_tokens(message.content)}")
+                st.write(f"> {tokenizer.encode_text_to_tokens(message.content)}")
         elif langchain_chat.is_ai_message(message):
             with st.chat_message("assistant"):
                 st.markdown(message.content)
-                st.write(f"> {encode_text_to_tokens(message.content)}")
+                st.write(f"> {tokenizer.encode_text_to_tokens(message.content)}")
         else:
             st.write(f"system message: {message.content}")
-
-
-def encode_text_to_tokens(text: str) -> str:
-    GPT_MODEL = "gpt-3.5-turbo"
-
-    encoding = tiktoken.encoding_for_model(GPT_MODEL)
-    tokens = encoding.encode(text)
-
-    return f"Text length: {len(text)}, \
-        Tokens: {tokens}, \
-        Tokens length: {len(tokens)}"
 
 
 if __name__ == "__main__":
