@@ -16,7 +16,7 @@ You can build the Docker image and launch the application using the following co
   cp .env.sample .env
   ```
 
-- Set `OPENAI_API_KEY` (required)
+  - Set `OPENAI_API_KEY` (required)
 
 - docker build and docker run
 
@@ -35,7 +35,11 @@ You can build the Docker image and launch the application using the following co
 Interactively talk with OpenAI sample bot, GPT Assistant, in UI.
 
 - Example usage image
+
   - User input
+
     <img width="740" alt="input" src="https://github.com/miolab/py_llm/assets/33124627/0c94b651-8d03-4aef-a7d3-62099eb3d2ac">
+
   - Result
+
     <img width="482" alt="result" src="https://github.com/miolab/py_llm/assets/33124627/f25a97ae-4c89-4d36-98e3-0824129da808">
