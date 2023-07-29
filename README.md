@@ -38,8 +38,14 @@ Interactively talk with OpenAI sample bot, GPT Assistant, in UI.
 
   - User input
 
-    <img width="740" alt="input" src="https://github.com/miolab/py_llm/assets/33124627/0c94b651-8d03-4aef-a7d3-62099eb3d2ac">
+    <img width="500" alt="image" src="https://github.com/miolab/py_llm/assets/33124627/0fb5be33-ced1-4cdd-bb00-c39e05ee5bb1">
+
 
   - Result
 
-    <img width="482" alt="result" src="https://github.com/miolab/py_llm/assets/33124627/f25a97ae-4c89-4d36-98e3-0824129da808">
+    <img width="375" alt="image" src="https://github.com/miolab/py_llm/assets/33124627/22d86f1f-0a29-408c-9144-39376d242e7d">
+
+## Ref
+
+- LangChain https://www.langchain.com/
+- Streamlit https://streamlit.io/

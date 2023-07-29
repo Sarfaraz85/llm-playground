@@ -4,7 +4,7 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONPATH=./
 
 # NOTE: Uncomment if experiencing timeouts when running `docker run`
-# ENV PIP_DEFAULT_TIMEOUT=1000
+# ENV PIP_DEFAULT_TIMEOUT=600
 
 WORKDIR /app
 
