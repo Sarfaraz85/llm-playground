@@ -25,6 +25,8 @@ def streamlit_render() -> None:
         _handle_user_input(user_input)
         _display_messages()
 
+    _initialize_messages()
+
 
 def _handle_user_input(user_input: str) -> None:
     """Handles user input by generating a language model response."""
@@ -50,6 +52,14 @@ def _display_messages() -> None:
                 st.write(f"> {tokenizer.encode_text_to_tokens(message.content)}")
         else:
             st.write(f"system message: {message.content}")
+
+
+def _initialize_messages() -> None:
+    """Initialize messages."""
+    initialize_button = st.button("クリアして最初の状態にする", key="clear")
+
+    if initialize_button or "messages" not in st.session_state:
+        st.session_state.messages = [langchain_chat.system_message_content()]
 
 
 if __name__ == "__main__":

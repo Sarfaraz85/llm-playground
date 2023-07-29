@@ -21,9 +21,9 @@ class LangchainChat:
         self, messages: list[SystemMessage | HumanMessage | AIMessage]
     ) -> AIMessage:
         """Generates a language model response based on given messages."""
-        api_key = os.getenv("OPENAI_API_KEY")
+        os.getenv("OPENAI_API_KEY")
 
-        llm = ChatOpenAI(api_key=api_key, temperature=0.1)
+        llm = ChatOpenAI(temperature=0.1)
         response = llm(messages)
 
         return response

@@ -25,7 +25,8 @@ class TokenUtils:
             text (str): The text to be encoded.
 
         Returns:
-            str: Text that contains information about the length of the text, the tokens, and the number of tokens.
+            str: Text that contains information about the length of the text,
+                the tokens, and the number of tokens.
         """
         encoding = tiktoken.encoding_for_model(self.model_name)
         tokens = encoding.encode(text)

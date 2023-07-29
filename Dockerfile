@@ -3,6 +3,9 @@ FROM --platform=linux/x86_64 python:3.11.4-slim
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONPATH=./
 
+# NOTE: Uncomment if experiencing timeouts when running `docker run`
+# ENV PIP_DEFAULT_TIMEOUT=600
+
 WORKDIR /app
 
 RUN pip install --upgrade pip
