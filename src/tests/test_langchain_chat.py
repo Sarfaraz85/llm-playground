@@ -14,6 +14,13 @@ def test_human_message_content(langchain_chat: LangchainChat) -> None:
     assert human_message.content == question
 
 
+def test_ai_message(langchain_chat: LangchainChat):
+    response = "I'm AI."
+    ai_message = langchain_chat.ai_message(response)
+
+    assert ai_message.content == response
+
+
 def test_is_human_message(langchain_chat: LangchainChat) -> None:
     message = "Hello, I am human. How do you do?"
     human_message = langchain_chat.human_message_content(message)
