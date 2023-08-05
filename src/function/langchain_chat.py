@@ -9,9 +9,9 @@ class LangchainChat:
         and also for identifying the type of a message.
     """
 
-    def system_message_content(self) -> SystemMessage:
+    def system_message_content(self, prompt: str) -> SystemMessage:
         """Generates a SystemMessage with a predefined content."""
-        return SystemMessage(content="なるべく簡潔かつ文量少なく返答せよ。")
+        return SystemMessage(content=prompt)
 
     def human_message_content(self, question: str) -> HumanMessage:
         """Wraps the given question into a HumanMessage."""

@@ -1,0 +1,17 @@
+name: 'Build Docker image and Python Tests'
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t py_llm .
+
+      - name: Run pytest
+        run: docker run --rm py_llm python -m pytest
