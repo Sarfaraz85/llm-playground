@@ -6,6 +6,8 @@ GPT_MODEL = "gpt-3.5-turbo"
 tokenizer = TokenUtils(GPT_MODEL)
 langchain_chat = LangchainChat()
 
+SYSTEM_PROMPT: str = "なるべく簡潔かつ文量少なく返答せよ。"
+
 
 def streamlit_render() -> None:
     """Renders the main Streamlit page."""
@@ -13,7 +15,9 @@ def streamlit_render() -> None:
     st.header(":rocket: GPT Assistant")
 
     if "messages" not in st.session_state:
-        st.session_state.messages = [langchain_chat.system_message_content()]
+        st.session_state.messages = [
+            langchain_chat.system_message_content(SYSTEM_PROMPT)
+        ]
 
     form_container = st.container()
     with form_container:
@@ -59,7 +63,9 @@ def _initialize_messages() -> None:
     initialize_button = st.button("クリアして最初の状態にする", key="clear")
 
     if initialize_button or "messages" not in st.session_state:
-        st.session_state.messages = [langchain_chat.system_message_content()]
+        st.session_state.messages = [
+            langchain_chat.system_message_content(SYSTEM_PROMPT)
+        ]
 
 
 if __name__ == "__main__":

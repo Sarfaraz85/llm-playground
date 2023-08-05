@@ -7,6 +7,14 @@ def langchain_chat() -> LangchainChat:
     return LangchainChat()
 
 
+def test_system_message_content(langchain_chat: LangchainChat):
+    system_message = langchain_chat.system_message_content(
+        "Keep your replies as brief and as few sentences."
+    )
+
+    assert system_message.content == "Keep your replies as brief and as few sentences."
+
+
 def test_human_message_content(langchain_chat: LangchainChat) -> None:
     question = "Hello, I am human. How do you do?"
     human_message = langchain_chat.human_message_content(question)
