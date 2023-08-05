@@ -22,6 +22,21 @@ def test_human_message_content(langchain_chat: LangchainChat) -> None:
     assert human_message.content == question
 
 
+def test_llm_generate(mocker, langchain_chat):
+    mocker.patch("src.function.langchain_chat.os.getenv", return_value="DUMMY_API_KEY")
+    mock_response = {"content": "I'm AI."}
+
+    mock_openai_instance = mocker.MagicMock()
+    mock_openai_instance.return_value = mock_response
+
+    with mocker.patch(
+        "src.function.langchain_chat.ChatOpenAI", return_value=mock_openai_instance
+    ):
+        messages = []
+        response = langchain_chat.llm_generate(messages)
+        assert response["content"] == "I'm AI."
+
+
 def test_ai_message(langchain_chat: LangchainChat):
     response = "I'm AI."
     ai_message = langchain_chat.ai_message(response)
