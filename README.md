@@ -42,7 +42,7 @@ Interactively talk with OpenAI sample bot, GPT Assistant, in UI.
 
   - Result
 
-    <img width="375" alt="image" src="https://github.com/miolab/py_llm/assets/33124627/22d86f1f-0a29-408c-9144-39376d242e7d">
+    <img width="500" alt="image" src="https://github.com/miolab/py_llm/assets/33124627/8accdcfc-0ef8-4850-a69c-19576bb80018">
 
 ## Ref
 
