@@ -4,7 +4,7 @@ import tiktoken
 class TokenUtils:
     """A utility class for tokenization tasks.
     - This class uses a specific model to encode text into tokens and provides
-    information about the length of the text, the tokens, and the number of tokens.
+    information about the length of the text and the number of tokens.
 
     Attributes:
         model_name (str): The name of the model to use for tokenization.
@@ -25,12 +25,9 @@ class TokenUtils:
             text (str): The text to be encoded.
 
         Returns:
-            str: Text that contains information about the length of the text,
-                the tokens, and the number of tokens.
+            str: Information about the length of the text and the number of tokens.
         """
         encoding = tiktoken.encoding_for_model(self.model_name)
         tokens = encoding.encode(text)
 
-        return f"Text length: {len(text)}, \
-            Tokens: {tokens}, \
-            Tokens length: {len(tokens)}"
+        return f"Text length: {len(text)}, Tokens length: {len(tokens)}"
