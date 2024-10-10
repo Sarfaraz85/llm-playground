@@ -11,7 +11,7 @@ class TokenUtils:
     """
 
     def __init__(self, model_name: str):
-        """Initializes the TokenUtils class with a specific model name. (e.g. "gpt-3.5-turbo", etc.)
+        """Initializes the TokenUtils class with a specific model name. (e.g. "gpt-4o-mini-2024-07-18", etc.)
 
         Args:
             model_name (str): The name of the model to use for tokenization.

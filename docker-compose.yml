@@ -1,0 +1,6 @@
+services:
+  chatbox:
+    build: ./
+    command: streamlit run ./src/main.py
+    ports:
+      - "443:8501"

@@ -17,6 +17,8 @@ COPY poetry.lock ./
 RUN poetry config virtualenvs.create false \
   && poetry install
 
-COPY ./src ./src
+COPY . .
+
+EXPOSE 443 
 
 CMD ["streamlit", "run", "src/main.py"]

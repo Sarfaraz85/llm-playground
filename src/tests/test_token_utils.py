@@ -13,7 +13,7 @@ def test_encode_text_to_tokens(mocker):
     mock_encoding_for_model.return_value = mock_encoding
     assert len(mock_encoding.encode.return_value) == 3
 
-    model_name = "gpt-3.5-turbo"
+    model_name = "gpt-4o-mini-2024-07-18"
     tokenizer = TokenUtils(model_name)
     text = "Test"
 

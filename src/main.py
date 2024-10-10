@@ -4,8 +4,9 @@ from function.token_utils import TokenUtils
 
 
 class Main:
+    # GPT_MODEL = "gpt-4o-mini-2024-07-18"
     GPT_MODEL = "gpt-3.5-turbo"
-    SYSTEM_PROMPT: str = "なるべく簡潔かつ文量少なく返答せよ。"
+    SYSTEM_PROMPT: str = "Please respond as concisely and with as little text as possible."
 
     tokenizer = TokenUtils(GPT_MODEL)
     langchain_chat = LangchainChat()
@@ -26,8 +27,8 @@ class Main:
         form_container = st.container()
         with form_container:
             with st.form(key="form_textarea", clear_on_submit=True):
-                user_input = st.text_area(label="何でも聞いてください", key="input", height=80)
-                submit_button = st.form_submit_button(label="送信")
+                user_input = st.text_area(label="Please ask me anything", key="input", height=100)
+                submit_button = st.form_submit_button(label="Send")
 
         if user_input and submit_button:
             self._handle_user_input(user_input)
@@ -69,7 +70,7 @@ class Main:
 
     def _initialize_messages(self) -> None:
         """Initialize messages."""
-        initialize_button = st.button("クリアして最初の状態にする", key="clear")
+        initialize_button = st.button("Clear to initial state", key="clear")
 
         if initialize_button or "messages" not in st.session_state:
             st.session_state.messages = [
