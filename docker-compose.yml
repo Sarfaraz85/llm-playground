@@ -4,3 +4,4 @@ services:
     command: streamlit run ./src/main.py
     ports:
       - "443:8501"
+    env_file: ./.env

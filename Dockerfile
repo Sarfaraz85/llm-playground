@@ -17,7 +17,8 @@ COPY poetry.lock ./
 RUN poetry config virtualenvs.create false \
   && poetry install
 
-COPY . .
+COPY ./src ./src
+COPY ./.env ./.env
 
 EXPOSE 443 
 
