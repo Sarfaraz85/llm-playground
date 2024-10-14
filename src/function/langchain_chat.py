@@ -12,11 +12,16 @@ class LangchainChat:
 
     def __init__(self):
         try:
-            vaultUri = "https://sarfaraz-openai-api-key.vault.azure.net"
+            keyVaultName = "Sarfaraz-OPENAI-API-KEY"
+            KVUri = f"https://Sarfaraz-OPENAI-API-KEY.vault.azure.net"
+            secretName = "OPENAI-API-KEY"
+
             credential = DefaultAzureCredential()
-            self.vaultClient = SecretClient(vault_url=vaultUri, credential=credential)
-            vault_secret = vaultClient.get_secret("Sarfaraz-OPENAI-API-KEY")
-            self.openai_api_key = vault_secret.value
+            client = SecretClient(vault_url=KVUri, credential=credential)
+            
+            retrieved_secret = client.get_secret(secretName)
+            self.openai_api_key = retrieved_secret.value
+
             os.setenv("OPENAI_API_KEY", vault_secret.value)
         except Exception:
             print("Error while fetching vault api key", Exception)
