@@ -10,6 +10,8 @@ WORKDIR /app
 
 RUN pip install --upgrade pip
 RUN pip install poetry==1.8.3
+RUN pip install azure-identity
+RUN pip install azure-keyvault-secrets
 
 COPY pyproject.toml ./
 COPY poetry.lock ./
