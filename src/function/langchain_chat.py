@@ -1,13 +1,21 @@
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import SystemMessage, HumanMessage, AIMessage
 import os
-
+from azure.keyvault.secrets import SecretClient
+from azure.identity import DefaultAzureCredential
 
 class LangchainChat:
     """A utility class for generating and managing chat messages.
     - This class provides methods for generating AI and human messages,
         and also for identifying the type of a message.
     """
+
+    def __init__():
+        vaultUri = "https://sarfaraz-openai-api-key.vault.azure.net"
+        credential = DefaultAzureCredential()
+        self.vaultClient = SecretClient(vault_url=vaultUri, credential=credential)
+        vault_secret = vaultClient.get_secret("Sarfaraz-OPENAI-API-KEY")
+        os.setenv("OPENAI_API_KEY", vault_secret.value)
 
     def system_message_content(self, prompt: str) -> SystemMessage:
         """Generates a SystemMessage with a predefined content."""
