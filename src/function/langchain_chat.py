@@ -10,12 +10,17 @@ class LangchainChat:
         and also for identifying the type of a message.
     """
 
-    def __init__():
-        vaultUri = "https://sarfaraz-openai-api-key.vault.azure.net"
-        credential = DefaultAzureCredential()
-        self.vaultClient = SecretClient(vault_url=vaultUri, credential=credential)
-        vault_secret = vaultClient.get_secret("Sarfaraz-OPENAI-API-KEY")
-        os.setenv("OPENAI_API_KEY", vault_secret.value)
+    def __init__(self):
+        try:
+            vaultUri = "https://sarfaraz-openai-api-key.vault.azure.net"
+            credential = DefaultAzureCredential()
+            self.vaultClient = SecretClient(vault_url=vaultUri, credential=credential)
+            vault_secret = vaultClient.get_secret("Sarfaraz-OPENAI-API-KEY")
+            self.openai_api_key = vault_secret.value
+            os.setenv("OPENAI_API_KEY", vault_secret.value)
+        except Exception:
+            print("Error while fetching vault api key", Exception)
+
 
     def system_message_content(self, prompt: str) -> SystemMessage:
         """Generates a SystemMessage with a predefined content."""
@@ -29,9 +34,10 @@ class LangchainChat:
         self, messages: list[SystemMessage | HumanMessage | AIMessage]
     ) -> AIMessage:
         """Generates a language model response based on given messages."""
-        os.getenv("OPENAI_API_KEY")
+        if os._exists("OPENAI_API_KEY"):
+            self.openai_api_key = os.getenv("OPENAI_API_KEY")
 
-        llm = ChatOpenAI(temperature=0.1)
+        llm = ChatOpenAI(temperature=0.3, OPENAI_API_KEY=self.openai_api_key)
         response = llm(messages)
 
         return response
