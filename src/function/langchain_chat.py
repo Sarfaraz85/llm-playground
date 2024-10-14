@@ -20,6 +20,7 @@ class LangchainChat:
             os.setenv("OPENAI_API_KEY", vault_secret.value)
         except Exception:
             print("Error while fetching vault api key", Exception)
+            self.openai_api_key = os.getenv("OPENAI_API_KEY")
 
 
     def system_message_content(self, prompt: str) -> SystemMessage:
@@ -34,10 +35,7 @@ class LangchainChat:
         self, messages: list[SystemMessage | HumanMessage | AIMessage]
     ) -> AIMessage:
         """Generates a language model response based on given messages."""
-        if os._exists("OPENAI_API_KEY"):
-            self.openai_api_key = os.getenv("OPENAI_API_KEY")
-
-        llm = ChatOpenAI(temperature=0.3, OPENAI_API_KEY=self.openai_api_key)
+        llm = ChatOpenAI(temperature=0.3, openai_api_key=self.openai_api_key)
         response = llm(messages)
 
         return response
