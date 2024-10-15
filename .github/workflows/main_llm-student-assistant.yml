@@ -34,11 +34,11 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo ${{ secrets.OPENAI_API_KEY }} | awk -F"_" '{print $4-$5-$6}'
+          echo ${{ secrets.OPENAI_API_KEY }} | awk -F"_" '{print $2}'
           echo OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} >> ./.env
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip .* ./.env
+        run: zip -r release.zip * .env
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
