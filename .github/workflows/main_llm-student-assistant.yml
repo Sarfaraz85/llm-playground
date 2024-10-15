@@ -34,11 +34,11 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo ${{ secrets.OPENAI_API_KEY }} | awk -F_ '{print $4-$5-$6}'
+          echo ${{ secrets.OPENAI_API_KEY }} | awk -F"_" '{print $4-$5-$6}'
           echo OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} >> ./.env
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip ./
+        run: zip -r release.zip .* ./.env
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -56,8 +56,6 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
-    env:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
@@ -65,7 +63,9 @@ jobs:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: |
+          unzip release.zip
+          source ./.env
 
       
       - name: Login to Azure
