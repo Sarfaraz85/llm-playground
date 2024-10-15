@@ -34,10 +34,11 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} >> .env
+          echo ${{ secrets.OPENAI_API_KEY }} | awk -F_ '{print $4-$5-$6}'
+          echo OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} >> ./.env
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: zip -r release.zip ./
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -55,7 +56,8 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
-
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
@@ -79,4 +81,5 @@ jobs:
         with:
           app-name: 'llm-student-assistant'
           slot-name: 'Production'
+
           
